@@ -15,6 +15,10 @@ local function tostrtb_b(t, p, b)
         b[#b + 1] = " = "
         if type(v) == "table" then
             tostrtb_b(v, indent, b)
+        elseif type(v) == "string" then
+            b[#b + 1] = "\""
+            b[#b + 1] = tostring(v)
+            b[#b + 1] = "\""
         else
             b[#b + 1] = tostring(v)
         end

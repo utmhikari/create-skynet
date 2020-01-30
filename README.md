@@ -7,7 +7,14 @@ A simple launch application for [skynet](https://github.com/cloudwu/skynet)
 - lua 5.3.5
 - skynet prerequisites (see [skynet wiki](https://github.com/cloudwu/skynet/wiki))
 
-## Structures
+## Usage
+
+cd to the root dir and run `./script/start.sh` to start the server
+
+basically refer to [skynet_example](https://github.com/cloudwu/skynet_sample) and examples already written in skynet module
+
+
+## Structure
 
 - bin: binaries
 - config: skynet configs

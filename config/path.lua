@@ -23,4 +23,6 @@ lua_path = SKYNET_ROOT .. "lualib/?.lua;" .. SKYNET_ROOT .. "lualib/?/init.lua;"
 
 lua_cpath = SKYNET_ROOT .. "luaclib/?.so;" .. LUACLIB_DIR .. "?.so;" .. INTERNAL_LUACLIB_DIR .. "?.so"
 
+cpath = SKYNET_ROOT .. "cservice/?.so"
+
 -- snax = ROOT.."examples/?.lua;"..ROOT.."test/?.lua"

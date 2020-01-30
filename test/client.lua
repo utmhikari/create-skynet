@@ -1,22 +1,22 @@
 package.cpath = "skynet/luaclib/?.so"
-package.path = "skynet/lualib/?.lua;lualib/?.lua"
+package.path = "skynet/lualib/?.lua;lualib/?.lua;internal/lualib/?.lua"
 
 if _VERSION ~= "Lua 5.3" then
 	error "Use lua 5.3"
 end
 
-local socket = require "client.socket"
-local proto = require "proto"
-local sproto = require "sproto"
+local Socket = require("client.socket")
+local Proto = require("proto")
+local Sproto = require("sproto")
 
-local host = sproto.new(proto.s2c):host "package"
-local request = host:attach(sproto.new(proto.c2s))
+local host = Sproto.new(Proto.s2c):host "package"
+local request = host:attach(Sproto.new(Proto.c2s))
 
-local fd = assert(socket.connect("127.0.0.1", 8888))
+local fd = assert(Socket.connect("127.0.0.1", 8888))
 
 local function send_package(fd, pack)
 	local package = string.pack(">s2", pack)
-	socket.send(fd, package)
+	Socket.send(fd, package)
 end
 
 local function unpack_package(text)
@@ -38,7 +38,7 @@ local function recv_package(last)
 	if result then
 		return result, last
 	end
-	local r = socket.recv(fd)
+	local r = Socket.recv(fd)
 	if not r then
 		return nil, last
 	end
@@ -102,7 +102,7 @@ send_request("handshake")
 send_request("set", { what = "hello", value = "world" })
 while true do
 	dispatch_package()
-	local cmd = socket.readstdin()
+	local cmd = Socket.readstdin()
 	if cmd then
 		if cmd == "quit" then
 			send_request("quit")
@@ -110,6 +110,6 @@ while true do
 			send_request("get", { what = cmd })
 		end
 	else
-		socket.usleep(100)
+		Socket.usleep(100)
 	end
 end

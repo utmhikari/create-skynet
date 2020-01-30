@@ -1,19 +1,20 @@
-local skynet = require "skynet"
+local Skynet = require("skynet")
+local Logger = require("logger")
 
-skynet.start(function()
-	skynet.error("create-skynet start server~")
-    skynet.uniqueservice("proto")
-    local debug_console_port = skynet.getenv("debug_console_port")
+Skynet.start(function()
+	Logger.info("create-skynet start server~")
+    Skynet.uniqueservice("proto")
+    local debug_console_port = Skynet.getenv("debug_console_port")
     if debug_console_port then
-        skynet.newservice("debug_console", debug_console_port)
+        Skynet.newservice("debug_console", debug_console_port)
     end
-	skynet.newservice("db")
-    local watchdog = skynet.newservice("watchdog")
-    local watchdog_port = skynet.getenv("watchdog_port")
-	skynet.call(watchdog, "lua", "start", {
+	Skynet.newservice("db")
+    local watchdog = Skynet.newservice("watchdog")
+    local watchdog_port = Skynet.getenv("watchdog_port")
+	Skynet.call(watchdog, "lua", "start", {
         port = watchdog_port,
         nodelay = true
 	})
-	skynet.error("Watchdog listening on", watchdog_port)
-	skynet.exit()
+	Logger.info("Watchdog listening on", watchdog_port)
+	Skynet.exit()
 end)

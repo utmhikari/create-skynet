@@ -1,8 +1,8 @@
-local sprotoparser = require "sprotoparser"
+local Sprotoparser = require("sprotoparser")
 
-local proto = {}
+local Proto = {}
 
-proto.c2s = sprotoparser.parse [[
+Proto.c2s = Sprotoparser.parse [[
 .package {
 	type 0 : integer
 	session 1 : integer
@@ -34,7 +34,7 @@ quit 4 {}
 
 ]]
 
-proto.s2c = sprotoparser.parse [[
+Proto.s2c = Sprotoparser.parse [[
 .package {
 	type 0 : integer
 	session 1 : integer
@@ -43,6 +43,4 @@ proto.s2c = sprotoparser.parse [[
 heartbeat 1 {}
 ]]
 
-return proto
-
-
+return Proto
